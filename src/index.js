@@ -70,7 +70,7 @@ class Cache {
     callback(null, null);
   }
 
-  save(store) {
+  save(data) {
     if (window.localStorage) {
       data.i18nStamp = new Date().getTime();
 

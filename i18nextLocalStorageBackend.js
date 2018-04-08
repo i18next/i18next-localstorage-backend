@@ -102,7 +102,7 @@ var Cache = function () {
     }
   }, {
     key: 'save',
-    value: function save(store) {
+    value: function save(data) {
       if (window.localStorage) {
         data.i18nStamp = new Date().getTime();
 
