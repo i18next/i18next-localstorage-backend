@@ -1,4 +1,4 @@
-### 1.1.3
+### 1.1.4
 - fixes cache save call
 
 ### 1.1.1
