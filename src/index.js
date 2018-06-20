@@ -1,15 +1,6 @@
-import { defaults } from './utils';
-
-/**
- * Checks for localStorage on our window (don't fail on SSR).
- * @returns {boolean} True if we have a local storage.
- */
-function hasLocalStorage() {
-  if (typeof global.window === 'undefined') return false;
-  if (!global.window.localStorage) return false;
-
-  return true;
-}
+const g = global;
+const w = g.window;
+const l = w.localStorage;
 
 /**
  * Builds the prefix key for local storage.
@@ -23,45 +14,42 @@ function keyBuilder(language, namespace, { prefix = '' } = {}) {
   return `${prefix}${language}-${namespace}`;
 }
 
-const storage = {
-  setItem(key, value) {
-    if (!hasLocalStorage()) return;
-
-    try {
-      global.window.localStorage.setItem(key, value);
-    } catch (e) {
-      // f.log('failed to set value for key "' + key + '" to localStorage.');
-    }
-  },
-  getItem(key, value) {
-    if (!hasLocalStorage()) return undefined;
-
-    try {
-      return global.window.localStorage.getItem(key, value);
-    } catch (e) {
-      return undefined;
-      // f.log('failed to get value for key "' + key + '" from localStorage.');
-    }
+function setItem(key, value) {
+  try {
+    l.setItem(key, value);
+  } catch (e) {
+    // f.log('failed to set value for key "' + key + '" to localStorage.');
   }
-};
+}
 
-function getDefaults() {
-  return {
-    prefix: 'i18next_res_',
-    expirationTime: 7 * 24 * 60 * 60 * 1000,
-    versions: {}
-  };
+function getItem(key, value) {
+  try {
+    return l.getItem(key, value);
+  } catch (e) {
+    return undefined;
+    // f.log('failed to get value for key "' + key + '" from localStorage.');
+  }
 }
 
 class Cache {
   constructor(services, options = {}) {
-    this.init(services, options);
+    this.init(services, {
+      prefix: 'i18next_res_',
+      expirationTime: 7 * 24 * 60 * 60 * 1000,
+      versions: {},
+      ...options,
+    });
+
     this.type = 'backend';
   }
 
   init(services, options = {}) {
+    this.options = options;
     this.services = services;
-    this.options = defaults(options, this.options || {}, getDefaults());
+
+    for (let key of options) {
+      if (this.options[key] === undefined) this.options[key] = options[key];
+    }
   }
 
   /**
@@ -72,14 +60,11 @@ class Cache {
    * @returns {object|boolean} The result of the local storage fetch or false.
    */
   get(language, namespace) {
-    if (!hasLocalStorage()) return false;
-
-    const storageItem = storage.getItem(keyBuilder(language, namespace, this.options));
-
-    // We shoud load the translations anew
-    if (!storageItem) return false;
-
-    return JSON.parse(storageItem);
+    try {
+      return JSON.parse(getItem(keyBuilder(language, namespace, this.options)));
+    } catch (err) {
+      return undefined;
+    }
   }
 
   /**
@@ -100,19 +85,18 @@ class Cache {
     if (!local.i18nStamp) return callback(null, null);
     if (local.i18nStamp + this.options.expirationTime < nowMS) return callback(null, null);
 
-    const versionResolver = this.options.versions[language];
+    const resolver = this.options.versions[language];
 
-    // Sometimes we may want to specify the version from a server check, so as not to always manually bump the version
-    // We'll wait for the promise to resolve, then check the version string from the result
-    if (versionResolver instanceof Promise) {
-      return versionResolver.then((versionString) => {
-        if (versionString !== local.i18nVersion) return callback(null, null);
-        return callback(null, local);
+    // We may have a promise version
+    if (resolver instanceof Promise) {
+      return resolver.then(version => {
+        data.i18nVersion = version;
+        this.set(language, namespace, data);
       });
     }
 
     // there should be no language version set, or if it is, it should match the one in translation
-    if (versionResolver !== local.i18nVersion) return callback(null, null);
+    if (resolver !== local.i18nVersion) return callback(null, null);
 
     // Looks like we've loaded everything successfully
     delete local.i18nVersion;
@@ -128,7 +112,7 @@ class Cache {
    * @param {object} data - Will be stringified and saved.
    */
   set(language, namespace, data) {
-    storage.setItem(keyBuilder(language, namespace, this.options), JSON.stringify(data));
+    setItem(keyBuilder(language, namespace, this.options), JSON.stringify(data));
   }
 
   /**
@@ -139,25 +123,28 @@ class Cache {
    * @param {object} data - Translations to be saved or loaded.
    */
   save(language, namespace, data) {
-    if (!hasLocalStorage()) return;
+    try {
+      data.i18nStamp = new Date().getTime();
 
-    data.i18nStamp = new Date().getTime();
+      const resolver = this.options.versions[language];
 
-    // language version (if set)
-    const resolver = this.options.versions[language];
-    if (!resolver) return this.set(language, namespace, data);
+      // We may have a promise version
+      if (resolver instanceof Promise) {
+        return resolver.then(version => {
+          data.i18nVersion = version;
+          this.set(language, namespace, data);
+        });
+      }
 
-    // We may have a promise version
-    if (resolver instanceof Promise) {
-      return resolver.then(version => {
-        data.i18nVersion = version;
-        this.set(language, namespace, data);
-      });
+      // language version (if set)
+      if (!resolver) return this.set(language, namespace, data);
+
+      // Simple string version
+      data.i18nVersion = resolver;
+      this.set(language, namespace, data);
+    } catch (err) {
+      // f.log('failed to get value for key "' + key + '" from localStorage.');
     }
-
-    // Simple string version
-    data.i18nVersion = resolver;
-    this.set(language, namespace, data);
   }
 }
 
