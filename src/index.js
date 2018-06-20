@@ -1,7 +1,3 @@
-const g = global;
-const w = g.window;
-const l = w.localStorage;
-
 /**
  * Builds the prefix key for local storage.
  *
@@ -16,7 +12,7 @@ function keyBuilder(language, namespace, { prefix = '' } = {}) {
 
 function setItem(key, value) {
   try {
-    l.setItem(key, value);
+    global.window.localStorage.setItem(key, value);
   } catch (e) {
     // f.log('failed to set value for key "' + key + '" to localStorage.');
   }
@@ -24,7 +20,7 @@ function setItem(key, value) {
 
 function getItem(key, value) {
   try {
-    return l.getItem(key, value);
+    return global.window.localStorage.getItem(key, value);
   } catch (e) {
     return undefined;
     // f.log('failed to get value for key "' + key + '" from localStorage.');
