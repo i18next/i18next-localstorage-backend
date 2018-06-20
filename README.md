@@ -1,25 +1,22 @@
 # Introduction
 
-This is a i18next cache layer to be used in the browser. It will load and cache resources from localStorage and can be used in combination with the [chained backend](https://github.com/i18next/i18next-chained-backend).
+This is a i18next cache layer to be used in the browser. It will load and cache resources from localStorage and can be used in combination with the [chained backend](https://github.com/WASD-Team/i18next-localstorage-backend).
+
+This is a fork, which supports loading translation versions from a promises. Linting is applied and is in compliance with AirBNB coding guidlines.
 
 # Getting started
 
-Source can be loaded via [npm](https://www.npmjs.com/package/i18next-localstorage-cache)or [downloaded](https://github.com/i18next/i18next-localStorage-cache/blob/master/i18nextLocalStorageCache.min.js) from this repo.
+`yarn add git+https://github.com/WASD-Team/i18next-localstorage-backend`
 
 - If you don't use a module loader it will be added to window.i18nextLocalStorageBackend
-
-```
-# npm package
-$ npm install i18next-localstorage-backend
-```
 
 Wiring up with the chained backend:
 
 ```js
 import i18next from 'i18next';
 import Backend from 'i18next-chained-backend';
-import LocalStorageBackend from 'i18next-localstorage-backend'; // primary use cache
 import XHR from 'i18next-xhr-backend'; // fallback xhr load
+import LocalStorageBackend from 'i18next-localstorage-backend'; // primary use cache
 
 i18next
   .use(Backend)
@@ -50,7 +47,7 @@ i18next
   expirationTime: 7*24*60*60*1000,
 
   // language versions
-  versions: {}
+  versions: { en: 'v1.2', ru: Promise.resolve('v1.2') }
 };
 ```
 
