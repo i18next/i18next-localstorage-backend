@@ -1,7 +1,7 @@
 export function defaults(obj, ...args) {
   const copy = { ...obj };
 
-  args.each((source) => {
+  args.forEach((source) => {
     if (!source) return;
 
     for (const prop in source) {
@@ -13,7 +13,7 @@ export function defaults(obj, ...args) {
 
 export function extend(obj, ...args) {
   const copy = { ...obj };
-  args.each((source) => {
+  args.forEach((source) => {
     if (!source) return;
 
     for (const prop in source) {
