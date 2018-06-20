@@ -13,7 +13,7 @@
       args[_key - 1] = arguments[_key];
     }
 
-    args.each(function (source) {
+    args.forEach(function (source) {
       if (!source) return;
 
       for (var prop in source) {
@@ -142,7 +142,7 @@
 
         // expiration field is mandatory, and should not be expired
         var nowMS = new Date().getTime();
-        if (local.i18nStamp) return callback(null, null);
+        if (!local.i18nStamp) return callback(null, null);
         if (local.i18nStamp + this.options.expirationTime < nowMS) return callback(null, null);
 
         var versionResolver = this.options.versions[language];

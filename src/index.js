@@ -97,7 +97,7 @@ class Cache {
 
     // expiration field is mandatory, and should not be expired
     const nowMS = new Date().getTime();
-    if (local.i18nStamp) return callback(null, null);
+    if (!local.i18nStamp) return callback(null, null);
     if (local.i18nStamp + this.options.expirationTime < nowMS) return callback(null, null);
 
     const versionResolver = this.options.versions[language];
