@@ -47,7 +47,7 @@ class Cache {
     this.options = options;
     this.services = services;
 
-    for (let key of options) {
+    for (let key in options) {
       if (this.options[key] === undefined) this.options[key] = options[key];
     }
   }
