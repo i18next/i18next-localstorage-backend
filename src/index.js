@@ -144,10 +144,19 @@ class Cache {
     data.i18nStamp = new Date().getTime();
 
     // language version (if set)
-    if (this.options.versions[language]) {
-      data.i18nVersion = this.options.versions[language];
+    const resolver = this.options.versions[language];
+    if (!resolver) return this.set(language, namespace, data);
+
+    // We may have a promise version
+    if (resolver instanceof Promise) {
+      return resolver.then(version => {
+        data.i18nVersion = version;
+        this.set(language, namespace, data);
+      });
     }
 
+    // Simple string version
+    data.i18nVersion = resolver;
     this.set(language, namespace, data);
   }
 }

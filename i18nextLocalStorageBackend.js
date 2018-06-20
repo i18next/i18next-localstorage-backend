@@ -190,15 +190,26 @@
     }, {
       key: 'save',
       value: function save(language, namespace, data) {
+        var _this = this;
+
         if (!hasLocalStorage()) return;
 
         data.i18nStamp = new Date().getTime();
 
         // language version (if set)
-        if (this.options.versions[language]) {
-          data.i18nVersion = this.options.versions[language];
+        var resolver = this.options.versions[language];
+        if (!resolver) return this.set(language, namespace, data);
+
+        // We may have a promise version
+        if (resolver instanceof Promise) {
+          return resolver.then(function (version) {
+            data.i18nVersion = version;
+            _this.set(language, namespace, data);
+          });
         }
 
+        // Simple string version
+        data.i18nVersion = resolver;
         this.set(language, namespace, data);
       }
     }]);
