@@ -3,6 +3,7 @@
   "version": "1.1.4",
   "description": "caching layer backend for i18next using browsers localStorage",
   "main": "./index.js",
+  "types": "./index.d.ts",
   "jsnext:main": "dist/es/index.js",
   "keywords": [
     "i18next",
