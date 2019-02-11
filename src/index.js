@@ -37,7 +37,7 @@ class Cache {
 
   init(services, options = {}) {
     this.services = services;
-    this.options = { ...getDefaults(), ...this.options, options };
+    this.options = { ...getDefaults(), ...this.options, ...options };
   }
 
   read(language, namespace, callback) {
