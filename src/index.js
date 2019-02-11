@@ -1,5 +1,3 @@
-import * as utils from './utils';
-
 const storage = {
   setItem(key, value) {
     if (window.localStorage) {
@@ -39,11 +37,10 @@ class Cache {
 
   init(services, options = {}) {
     this.services = services;
-    this.options = utils.defaults(options, this.options || {}, getDefaults());
+    this.options = { ...getDefaults(), ...this.options, options };
   }
 
   read(language, namespace, callback) {
-    const store = {};
     const nowMS = new Date().getTime();
 
     if (!window.localStorage) {
@@ -56,10 +53,10 @@ class Cache {
       local = JSON.parse(local);
       if (
         // expiration field is mandatory, and should not be expired
-        local.i18nStamp && local.i18nStamp + this.options.expirationTime > nowMS &&
+        local.i18nStamp && local.i18nStamp + this.options.expirationTime > nowMS
 
         // there should be no language version set, or if it is, it should match the one in translation
-        this.options.versions[language] === local.i18nVersion
+        && this.options.versions[language] === local.i18nVersion
       ) {
         delete local.i18nVersion;
         delete local.i18nStamp;
@@ -67,7 +64,7 @@ class Cache {
       }
     }
 
-    callback(null, null);
+    return callback(null, null);
   }
 
   save(language, namespace, data) {
