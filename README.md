@@ -50,7 +50,10 @@ i18next
   expirationTime: 7*24*60*60*1000,
 
   // language versions
-  versions: {}
+  versions: {},
+
+  // can be either window.localStorage or window.sessionStorage. Default: window.localStorage
+  store: window.localStorage
 };
 ```
 

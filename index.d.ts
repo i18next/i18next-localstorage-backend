@@ -3,6 +3,7 @@ declare namespace I18NextLocalStorageBackend {
     prefix?: string;
     expirationTime?: number;
     versions?: { [key: string]: string };
+    store?: any
   }
 
   type LoadCallback = (error: any, result: string | false) => void;

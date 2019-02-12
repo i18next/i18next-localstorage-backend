@@ -1,30 +1,37 @@
-const storage = {
+class Storage {
+
+  constructor(options) {
+    this.store = options.store;
+  }
+
   setItem(key, value) {
-    if (window.localStorage) {
+    if (this.store) {
       try {
-        window.localStorage.setItem(key, value);
+        this.store.setItem(key, value);
       } catch (e) {
         // f.log('failed to set value for key "' + key + '" to localStorage.');
       }
     }
-  },
+  }
+
   getItem(key, value) {
-    if (window.localStorage) {
+    if (this.store) {
       try {
-        return window.localStorage.getItem(key, value);
+        return this.store.getItem(key, value);
       } catch (e) {
         // f.log('failed to get value for key "' + key + '" from localStorage.');
       }
     }
     return undefined;
   }
-};
+}
 
 function getDefaults() {
   return {
     prefix: 'i18next_res_',
     expirationTime: 7 * 24 * 60 * 60 * 1000,
-    versions: {}
+    versions: {},
+    store: window.localStorage
   };
 }
 
@@ -38,16 +45,17 @@ class Cache {
   init(services, options = {}) {
     this.services = services;
     this.options = { ...getDefaults(), ...this.options, ...options };
+    this.storage = new Storage(this.options);
   }
 
   read(language, namespace, callback) {
     const nowMS = new Date().getTime();
 
-    if (!window.localStorage) {
+    if (!this.storage.store) {
       return callback(null, null);
     }
 
-    let local = storage.getItem(`${this.options.prefix}${language}-${namespace}`);
+    let local = this.storage.getItem(`${this.options.prefix}${language}-${namespace}`);
 
     if (local) {
       local = JSON.parse(local);
@@ -68,7 +76,7 @@ class Cache {
   }
 
   save(language, namespace, data) {
-    if (window.localStorage) {
+    if (this.storage.store) {
       data.i18nStamp = new Date().getTime();
 
       // language version (if set)
@@ -77,7 +85,7 @@ class Cache {
       }
 
       // save
-      storage.setItem(`${this.options.prefix}${language}-${namespace}`, JSON.stringify(data));
+      this.storage.setItem(`${this.options.prefix}${language}-${namespace}`, JSON.stringify(data));
     }
   }
 }
