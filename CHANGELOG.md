@@ -1,3 +1,7 @@
+### 2.1.1
+
+- typescript: Fixing a TypeScript error complaining of missing default export [8](https://github.com/i18next/i18next-localstorage-backend/pull/8)
+
 ### 2.1.0
 
 - optionally set store to use [7](https://github.com/i18next/i18next-localstorage-backend/pull/7)
