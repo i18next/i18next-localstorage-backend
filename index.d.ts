@@ -9,7 +9,7 @@ declare namespace I18NextLocalStorageBackend {
   type LoadCallback = (error: any, result: string | false) => void;
 }
 
-declare class I18NextLocalStorageBackend {
+export default class I18NextLocalStorageBackend {
   constructor(services?: any, options?: I18NextLocalStorageBackend.BackendOptions);
   init(services?: any, options?: I18NextLocalStorageBackend.BackendOptions): void;
   read(language: string, namespace: string, callback: I18NextLocalStorageBackend.LoadCallback): void;
@@ -18,5 +18,3 @@ declare class I18NextLocalStorageBackend {
   services: any;
   options: I18NextLocalStorageBackend.BackendOptions;
 }
-
-export = I18NextLocalStorageBackend;
