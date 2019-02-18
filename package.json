@@ -1,6 +1,6 @@
 {
   "name": "i18next-localstorage-backend",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "caching layer backend for i18next using browsers localStorage",
   "main": "./index.js",
   "types": "./index.d.ts",
