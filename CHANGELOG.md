@@ -1,3 +1,9 @@
+### 3.0.0
+
+- removes deprecated jsnext:main from package.json
+- Bundle all entry points with rollup [11](https://github.com/i18next/i18next-localstorage-backend/pull/11)
+- **note:** dist/es -> dist/esm, dist/commonjs -> dist/cjs (individual files -> one bundled file)
+
 ### 2.1.2
 
 - typescript: fix types [9](https://github.com/i18next/i18next-localstorage-backend/pull/9)
