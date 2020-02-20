@@ -1,3 +1,7 @@
+### 3.1.0
+
+- feat(version): add a defautversion option to apply a version for all languages in once [15](https://github.com/i18next/i18next-localstorage-backend/pull/15)
+
 ### 3.0.0
 
 - removes deprecated jsnext:main from package.json
