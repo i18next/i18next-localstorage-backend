@@ -100,7 +100,7 @@
     return {
       prefix: 'i18next_res_',
       expirationTime: 7 * 24 * 60 * 60 * 1000,
-      defaultVersion: '',
+      defaultVersion: undefined,
       versions: {},
       store: window.localStorage
     };

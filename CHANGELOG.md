@@ -1,3 +1,7 @@
+### 3.1.1
+
+- fix(options): make defaultVersion undefined [19](https://github.com/i18next/i18next-localstorage-backend/pull/19)
+
 ### 3.1.0
 
 - feat(version): add a defautversion option to apply a version for all languages in once [15](https://github.com/i18next/i18next-localstorage-backend/pull/15)
