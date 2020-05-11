@@ -19,7 +19,7 @@ Wiring up with the chained backend:
 import i18next from 'i18next';
 import Backend from 'i18next-chained-backend';
 import LocalStorageBackend from 'i18next-localstorage-backend'; // primary use cache
-import XHR from 'i18next-xhr-backend'; // fallback xhr load
+import HttpApi from 'i18next-http-backend'; // fallback http load
 
 i18next
   .use(Backend)
@@ -27,7 +27,7 @@ i18next
     backend: {
       backends: [
         LocalStorageBackend,  // primary
-        XHR                   // fallback
+        HttpApi               // fallback
       ],
       backendOptions: [{
         /* below options */
