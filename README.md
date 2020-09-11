@@ -64,7 +64,13 @@ i18next
 
 - Passing in a `versions` object (ex.: `versions: { en: 'v1.2', fr: 'v1.1' }`) will give you control over the cache based on translations version. This setting works along `expirationTime`, so a cached translation will still expire even though the version did not change. You can still set `expirationTime` far into the future to avoid this
 
-- Passing in a `defaultVersion` string (ex.: `version: 'v1.2'`) will act as if you applied a version to all languages using `versions` option. 
+- Passing in a `defaultVersion` string (ex.: `version: 'v1.2'`) will act as if you applied a version to all languages using `versions` option.
+
+
+## IMPORTANT ADVICE for the usage in combination with saveMissing/updateMissing
+
+We suggest not to use a caching layer in combination with saveMissing or updateMissing, because it may happen, that the trigger for this is based on stale data.
+
 
 --------------
 
