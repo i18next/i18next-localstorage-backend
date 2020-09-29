@@ -1,3 +1,7 @@
+### 3.1.2
+
+- typescript: Add defaultVersion to typings of BackendOptions [25](https://github.com/i18next/i18next-localstorage-backend/pull/25)
+
 ### 3.1.1
 
 - fix(options): make defaultVersion undefined [19](https://github.com/i18next/i18next-localstorage-backend/pull/19)
