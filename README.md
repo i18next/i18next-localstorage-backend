@@ -4,7 +4,7 @@ This is a i18next cache layer to be used in the browser. It will load and cache 
 
 # Getting started
 
-Source can be loaded via [npm](https://www.npmjs.com/package/i18next-localstorage-cache)or [downloaded](https://github.com/i18next/i18next-localStorage-cache/blob/master/i18nextLocalStorageCache.min.js) from this repo.
+Source can be loaded via [npm](https://www.npmjs.com/package/i18next-localstorage-cache) or [downloaded](https://github.com/i18next/i18next-localStorage-cache/blob/master/i18nextLocalStorageCache.min.js) from this repo.
 
 - If you don't use a module loader it will be added to window.i18nextLocalStorageBackend
 
