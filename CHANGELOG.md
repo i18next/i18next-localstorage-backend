@@ -1,3 +1,7 @@
+### 3.1.3
+
+- SSR fix [31](https://github.com/i18next/i18next-localstorage-backend/pull/31)
+
 ### 3.1.2
 
 - typescript: Add defaultVersion to typings of BackendOptions [25](https://github.com/i18next/i18next-localstorage-backend/pull/25)

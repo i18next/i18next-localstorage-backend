@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 class Storage {
 
   constructor(options) {
@@ -32,7 +33,7 @@ function getDefaults() {
     expirationTime: 7 * 24 * 60 * 60 * 1000,
     defaultVersion: undefined,
     versions: {},
-    store: window.localStorage
+    store: typeof window !== 'undefined' ? window.localStorage : null
   };
 }
 
