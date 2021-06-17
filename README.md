@@ -56,7 +56,7 @@ i18next
   versions: {},
 
   // can be either window.localStorage or window.sessionStorage. Default: window.localStorage
-  store: window.localStorage
+  store: typeof window !== 'undefined' ? window.localStorage : null
 };
 ```
 
@@ -66,6 +66,7 @@ i18next
 
 - Passing in a `defaultVersion` string (ex.: `version: 'v1.2'`) will act as if you applied a version to all languages using `versions` option.
 
+- The test on window makes this package available for SSR environments like NextJS
 
 ## IMPORTANT ADVICE for the usage in combination with saveMissing/updateMissing
 
