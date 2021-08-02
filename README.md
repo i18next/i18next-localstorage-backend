@@ -26,13 +26,14 @@ i18next
   .init({
     backend: {
       backends: [
-        LocalStorageBackend,  // primary
-        HttpApi               // fallback
+        LocalStorageBackend,  // primary backend
+        HttpApi               // fallback backend
       ],
       backendOptions: [{
-        /* below options */
+        /* options for primary backend */
       }, {
-        loadPath: '/locales/{{lng}}/{{ns}}.json' // xhr load path for my own fallback
+        /* options for secondary backend */
+        loadPath: '/locales/{{lng}}/{{ns}}.json' // http load path for my own fallback
       }]
     }
   });
