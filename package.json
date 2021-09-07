@@ -9,6 +9,10 @@
     "i18next",
     "i18next-backend"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/i18next/i18next-localStorage-backend.git"
+  },
   "homepage": "https://github.com/i18next/i18next-localStorage-backend",
   "bugs": "https://github.com/i18next/i18next-localStorage-backend/issues",
   "dependencies": {
