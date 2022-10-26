@@ -1,3 +1,7 @@
+### 4.0.0
+
+- typescript fix for i18next v22
+
 ### 3.1.3
 
 - SSR fix [31](https://github.com/i18next/i18next-localstorage-backend/pull/31)

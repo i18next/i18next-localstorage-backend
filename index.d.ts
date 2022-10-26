@@ -1,21 +1,28 @@
-declare namespace I18NextLocalStorageBackend {
-  interface BackendOptions {
-    prefix?: string;
-    expirationTime?: number;
-    versions?: { [key: string]: string };
-    defaultVersion?: string;
-    store?: any
-  }
+import { BackendModule, ReadCallback } from "i18next";
 
-  type LoadCallback = (error: any, result: string | false) => void;
+interface BackendOptions {
+  prefix?: string;
+  expirationTime?: number;
+  versions?: { [key: string]: string };
+  defaultVersion?: string;
+  store?: any;
 }
 
-export default class I18NextLocalStorageBackend {
-  constructor(services?: any, options?: I18NextLocalStorageBackend.BackendOptions);
-  init(services?: any, options?: I18NextLocalStorageBackend.BackendOptions): void;
-  read(language: string, namespace: string, callback: I18NextLocalStorageBackend.LoadCallback): void;
+export default class I18NextLocalStorageBackend
+  implements BackendModule<BackendOptions>
+{
+  constructor(services?: any, options?: BackendOptions);
+  init(services?: any, options?: BackendOptions): void;
+  read(language: string, namespace: string, callback: ReadCallback): void;
   save(language: string, namespace: string, data: any): void;
   type: "backend";
   services: any;
-  options: I18NextLocalStorageBackend.BackendOptions;
+  options: BackendOptions;
+}
+
+
+declare module "i18next" {
+  interface CustomPluginOptions {
+    backend?: BackendOptions;
+  }
 }
