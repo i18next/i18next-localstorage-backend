@@ -113,10 +113,9 @@
           var version = this.getVersion(language);
           if (
           // expiration field is mandatory, and should not be expired
-          local.i18nStamp && local.i18nStamp + this.options.expirationTime > nowMS
-
+          local.i18nStamp && local.i18nStamp + this.options.expirationTime > nowMS &&
           // there should be no language version set, or if it is, it should match the one in translation
-          && version === local.i18nVersion) {
+          version === local.i18nVersion) {
             delete local.i18nVersion;
             delete local.i18nStamp;
             return callback(null, local);
