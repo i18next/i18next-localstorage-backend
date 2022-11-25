@@ -1,3 +1,7 @@
+### 4.0.1
+
+- typescript: static type prop
+
 ### 4.0.0
 
 - typescript fix for i18next v22

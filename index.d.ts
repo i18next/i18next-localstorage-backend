@@ -11,6 +11,7 @@ interface BackendOptions {
 export default class I18NextLocalStorageBackend
   implements BackendModule<BackendOptions>
 {
+  static type: "backend";
   constructor(services?: any, options?: BackendOptions);
   init(services?: any, options?: BackendOptions): void;
   read(language: string, namespace: string, callback: ReadCallback): void;
@@ -19,7 +20,6 @@ export default class I18NextLocalStorageBackend
   services: any;
   options: BackendOptions;
 }
-
 
 declare module "i18next" {
   interface CustomPluginOptions {
