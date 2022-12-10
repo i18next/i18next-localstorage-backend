@@ -1,7 +1,7 @@
 import i18next from 'i18next';
-import Backend from 'i18next-localstorage-backend';
+import Backend, { LocalStorageBackendOptions } from 'i18next-localstorage-backend';
 
-i18next.use(Backend).init({
+i18next.use(Backend).init<LocalStorageBackendOptions>({
   backend: {
     prefix: 'asdf'
   },
