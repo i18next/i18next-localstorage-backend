@@ -1,6 +1,6 @@
 {
   "name": "i18next-localstorage-backend",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "caching layer backend for i18next using browsers localStorage",
   "main": "./dist/cjs/i18nextLocalStorageBackend.js",
   "module": "./dist/esm/i18nextLocalStorageBackend.js",
