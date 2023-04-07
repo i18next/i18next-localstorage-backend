@@ -27,12 +27,12 @@ class Storage {
 }
 
 function getDefaults () {
-  let store = null;
+  let store = null
   try {
-    store = window.localStorage;
+    store = window.localStorage
   } catch (e) {
     if (typeof window !== 'undefined') {
-      console.log('Failed to load local storage.', e);
+      console.log('Failed to load local storage.', e)
     }
   }
   return {
