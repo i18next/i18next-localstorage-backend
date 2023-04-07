@@ -104,12 +104,20 @@
     return Storage;
   }();
   function getDefaults() {
+    var store = null;
+    try {
+      store = window.localStorage;
+    } catch (e) {
+      if (typeof window !== 'undefined') {
+        console.log('Failed to load local storage.', e);
+      }
+    }
     return {
       prefix: 'i18next_res_',
       expirationTime: 7 * 24 * 60 * 60 * 1000,
       defaultVersion: undefined,
       versions: {},
-      store: typeof window !== 'undefined' ? window.localStorage : null
+      store: store
     };
   }
   var Cache = /*#__PURE__*/function () {
