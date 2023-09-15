@@ -4,14 +4,14 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.i18nextLocalStorageBackend = factory());
 })(this, (function () { 'use strict';
 
-  function _typeof(obj) {
+  function _typeof(o) {
     "@babel/helpers - typeof";
 
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-      return typeof obj;
-    } : function (obj) {
-      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    }, _typeof(obj);
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
   }
 
   function _toPrimitive(input, hint) {
@@ -69,8 +69,8 @@
     return Constructor;
   }
 
-  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+  function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
   /* eslint-disable max-classes-per-file */
   var Storage = /*#__PURE__*/function () {
     function Storage(options) {
@@ -138,7 +138,7 @@
     }, {
       key: "read",
       value: function read(language, namespace, callback) {
-        var nowMS = new Date().getTime();
+        var nowMS = Date.now();
         if (!this.storage.store) {
           return callback(null, null);
         }
@@ -151,9 +151,10 @@
           local.i18nStamp && local.i18nStamp + this.options.expirationTime > nowMS &&
           // there should be no language version set, or if it is, it should match the one in translation
           version === local.i18nVersion) {
+            var i18nStamp = local.i18nStamp;
             delete local.i18nVersion;
             delete local.i18nStamp;
-            return callback(null, local);
+            return callback(null, local, i18nStamp);
           }
         }
         return callback(null, null);
@@ -162,7 +163,7 @@
       key: "save",
       value: function save(language, namespace, data) {
         if (this.storage.store) {
-          data.i18nStamp = new Date().getTime();
+          data.i18nStamp = Date.now();
 
           // language version (if set)
           var version = this.getVersion(language);

@@ -1,3 +1,7 @@
+### 4.2.0
+
+- return timestamp when reading, can be useful for chained-backend
+
 ### 4.1.1
 
 - fix: localStorage SecutiryError [46](https://github.com/i18next/i18next-localstorage-backend/pull/46)

@@ -58,7 +58,7 @@ class Cache {
   }
 
   read (language, namespace, callback) {
-    const nowMS = new Date().getTime()
+    const nowMS = Date.now()
 
     if (!this.storage.store) {
       return callback(null, null)
@@ -76,9 +76,10 @@ class Cache {
         // there should be no language version set, or if it is, it should match the one in translation
         version === local.i18nVersion
       ) {
+        const i18nStamp = local.i18nStamp
         delete local.i18nVersion
         delete local.i18nStamp
-        return callback(null, local)
+        return callback(null, local, i18nStamp)
       }
     }
 
@@ -87,7 +88,7 @@ class Cache {
 
   save (language, namespace, data) {
     if (this.storage.store) {
-      data.i18nStamp = new Date().getTime()
+      data.i18nStamp = Date.now()
 
       // language version (if set)
       const version = this.getVersion(language)
