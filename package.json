@@ -33,7 +33,7 @@
     "eslint-plugin-promise": "6.1.1",
     "eslint-plugin-require-path-exists": "1.1.9",
     "eslint-plugin-standard": "5.0.0",
-    "i18next": "23.5.1",
+    "i18next": "23.7.1",
     "rimraf": "5.0.1",
     "rollup": "^2.78.1",
     "rollup-plugin-babel": "^4.4.0",
