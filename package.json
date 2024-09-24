@@ -35,7 +35,7 @@
     "eslint-plugin-standard": "5.0.0",
     "i18next": "23.7.1",
     "rimraf": "5.0.1",
-    "rollup": "^2.78.1",
+    "rollup": "^3.29.5",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2",
