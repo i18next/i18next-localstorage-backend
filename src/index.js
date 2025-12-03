@@ -68,7 +68,7 @@ class Cache {
 
     if (local) {
       local = JSON.parse(local)
-      const version = this.getVersion(language)
+      const version = this.getVersion(language, namespace)
       if (
         // expiration field is mandatory, and should not be expired
         local.i18nStamp && local.i18nStamp + this.options.expirationTime > nowMS &&
@@ -91,7 +91,7 @@ class Cache {
       data.i18nStamp = Date.now()
 
       // language version (if set)
-      const version = this.getVersion(language)
+      const version = this.getVersion(language, namespace)
       if (version) {
         data.i18nVersion = version
       }
@@ -101,7 +101,10 @@ class Cache {
     }
   }
 
-  getVersion (language) {
+  getVersion (language, namespace) {
+    if (typeof this.options.versions === 'function') {
+      return this.options.versions(language, namespace)
+    }
     return this.options.versions[language] || this.options.defaultVersion
   }
 }

@@ -53,7 +53,7 @@ i18next
   // Version applied to all languages, can be overriden using the option `versions`
   defaultVersion: '',
 
-  // language versions
+  // language versions; can also be a function that returns the version string
   versions: {},
 
   // can be either window.localStorage or window.sessionStorage. Default: window.localStorage
@@ -63,7 +63,7 @@ i18next
 
 - Contrary to cookies behavior, the cache will respect updates to `expirationTime`. If you set 7 days and later update to 10 days, the cache will persist for 10 days
 
-- Passing in a `versions` object (ex.: `versions: { en: 'v1.2', fr: 'v1.1' }`) will give you control over the cache based on translations version. This setting works along `expirationTime`, so a cached translation will still expire even though the version did not change. You can still set `expirationTime` far into the future to avoid this
+- Passing in a `versions` object (ex.: `versions: { en: 'v1.2', fr: 'v1.1' }`) or function (ex.: ``versions: (lng, ns) => `${lng}-${ns}-v1.1`}``) will give you control over the cache based on translations version. This setting works along `expirationTime`, so a cached translation will still expire even though the version did not change. You can still set `expirationTime` far into the future to avoid this
 
 - Passing in a `defaultVersion` string (ex.: `version: 'v1.2'`) will act as if you applied a version to all languages using `versions` option.
 
