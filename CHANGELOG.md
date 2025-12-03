@@ -1,3 +1,7 @@
+### 4.3.0
+
+- add getVersion prop [55](https://github.com/i18next/i18next-localstorage-backend/pull/55)
+
 ### 4.2.0
 
 - return timestamp when reading, can be useful for chained-backend

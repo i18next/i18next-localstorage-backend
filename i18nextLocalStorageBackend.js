@@ -14,59 +14,45 @@
     }, _typeof(o);
   }
 
-  function _toPrimitive(input, hint) {
-    if (_typeof(input) !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (_typeof(res) !== "object") return res;
+  function toPrimitive(t, r) {
+    if ("object" != _typeof(t) || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != _typeof(i)) return i;
       throw new TypeError("@@toPrimitive must return a primitive value.");
     }
-    return (hint === "string" ? String : Number)(input);
+    return ("string" === r ? String : Number)(t);
   }
 
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return _typeof(key) === "symbol" ? key : String(key);
+  function toPropertyKey(t) {
+    var i = toPrimitive(t, "string");
+    return "symbol" == _typeof(i) ? i : i + "";
   }
 
-  function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
+  function _defineProperty(e, r, t) {
+    return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
   }
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
+  function _classCallCheck(a, n) {
+    if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
   }
 
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
+  function _defineProperties(e, r) {
+    for (var t = 0; t < r.length; t++) {
+      var o = r[t];
+      o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, toPropertyKey(o.key), o);
     }
   }
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-      writable: false
-    });
-    return Constructor;
+  function _createClass(e, r, t) {
+    return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
+      writable: !1
+    }), e;
   }
 
   function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -77,7 +63,7 @@
       _classCallCheck(this, Storage);
       this.store = options.store;
     }
-    _createClass(Storage, [{
+    return _createClass(Storage, [{
       key: "setItem",
       value: function setItem(key, value) {
         if (this.store) {
@@ -101,7 +87,6 @@
         return undefined;
       }
     }]);
-    return Storage;
   }();
   function getDefaults() {
     var store = null;
@@ -116,6 +101,7 @@
       prefix: 'i18next_res_',
       expirationTime: 7 * 24 * 60 * 60 * 1000,
       defaultVersion: undefined,
+      getVersion: undefined,
       versions: {},
       store: store
     };
@@ -127,7 +113,7 @@
       this.init(services, options);
       this.type = 'backend';
     }
-    _createClass(Cache, [{
+    return _createClass(Cache, [{
       key: "init",
       value: function init(services) {
         var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -145,7 +131,7 @@
         var local = this.storage.getItem("".concat(this.options.prefix).concat(language, "-").concat(namespace));
         if (local) {
           local = JSON.parse(local);
-          var version = this.getVersion(language);
+          var version = this.getVersion(language, namespace);
           if (
           // expiration field is mandatory, and should not be expired
           local.i18nStamp && local.i18nStamp + this.options.expirationTime > nowMS &&
@@ -166,7 +152,7 @@
           data.i18nStamp = Date.now();
 
           // language version (if set)
-          var version = this.getVersion(language);
+          var version = this.getVersion(language, namespace);
           if (version) {
             data.i18nVersion = version;
           }
@@ -177,11 +163,11 @@
       }
     }, {
       key: "getVersion",
-      value: function getVersion(language) {
-        return this.options.versions[language] || this.options.defaultVersion;
+      value: function getVersion(language, namespace) {
+        var _this$options$getVers, _this$options;
+        return ((_this$options$getVers = (_this$options = this.options).getVersion) === null || _this$options$getVers === void 0 ? void 0 : _this$options$getVers.call(_this$options, language, namespace)) || this.options.versions[language] || this.options.defaultVersion;
       }
     }]);
-    return Cache;
   }();
   Cache.type = 'backend';
 
