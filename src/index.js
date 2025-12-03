@@ -39,6 +39,7 @@ function getDefaults () {
     prefix: 'i18next_res_',
     expirationTime: 7 * 24 * 60 * 60 * 1000,
     defaultVersion: undefined,
+    getVersion: undefined,
     versions: {},
     store
   }
@@ -102,10 +103,7 @@ class Cache {
   }
 
   getVersion (language, namespace) {
-    if (typeof this.options.versions === 'function') {
-      return this.options.versions(language, namespace)
-    }
-    return this.options.versions[language] || this.options.defaultVersion
+    return this.options.getVersion?.(language, namespace) || this.options.versions[language] || this.options.defaultVersion
   }
 }
 

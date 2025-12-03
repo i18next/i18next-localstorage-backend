@@ -50,11 +50,14 @@ i18next
   // expiration
   expirationTime: 7*24*60*60*1000,
 
-  // Version applied to all languages, can be overriden using the option `versions`
+  // Version applied to all languages, can be overridden using the option `versions`
   defaultVersion: '',
 
-  // language versions; can also be a function that returns the version string
+  // language versions, can be overridden using the `getVersion` function
   versions: {},
+
+  // language/namespace version getter
+  getVersion: (lng, ns) => '',
 
   // can be either window.localStorage or window.sessionStorage. Default: window.localStorage
   store: typeof window !== 'undefined' ? window.localStorage : null
@@ -63,7 +66,7 @@ i18next
 
 - Contrary to cookies behavior, the cache will respect updates to `expirationTime`. If you set 7 days and later update to 10 days, the cache will persist for 10 days
 
-- Passing in a `versions` object (ex.: `versions: { en: 'v1.2', fr: 'v1.1' }`) or function (ex.: ``versions: (lng, ns) => `${lng}-${ns}-v1.1`}``) will give you control over the cache based on translations version. This setting works along `expirationTime`, so a cached translation will still expire even though the version did not change. You can still set `expirationTime` far into the future to avoid this
+- Passing in a `versions` object (ex.: `versions: { en: 'v1.2', fr: 'v1.1' }`) or `getVersion` function (ex.: `getVersion: (lng, ns) => `${lng}-${ns}-v1.1`})`) will give you control over the cache based on translations version. This setting works along `expirationTime`, so a cached translation will still expire even though the version did not change. You can still set `expirationTime` far into the future to avoid this. Note that the `getVersion` function takes precedence over the `versions` object if both are provided.
 
 - Passing in a `defaultVersion` string (ex.: `version: 'v1.2'`) will act as if you applied a version to all languages using `versions` option.
 
