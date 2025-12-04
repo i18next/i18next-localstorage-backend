@@ -1,3 +1,7 @@
+### 4.3.1
+
+- add getVersion type [57](https://github.com/i18next/i18next-localstorage-backend/pull/57)
+
 ### 4.3.0
 
 - add getVersion prop [55](https://github.com/i18next/i18next-localstorage-backend/pull/55)
