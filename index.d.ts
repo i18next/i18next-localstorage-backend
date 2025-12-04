@@ -4,6 +4,7 @@ export interface LocalStorageBackendOptions {
   prefix?: string;
   expirationTime?: number;
   versions?: { [key: string]: string };
+  getVersion?: (lng: string, ns: string) => string | undefined;
   defaultVersion?: string;
   store?: any;
 }
