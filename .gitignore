@@ -20,3 +20,10 @@ dist/**/*
 
 # JetBrains IDE's
 .idea
+
+# Secrets & credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
