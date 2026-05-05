@@ -82,7 +82,7 @@ We suggest not to use a caching layer in combination with saveMissing or updateM
 <h3 align="center">Gold Sponsors</h3>
 
 <p align="center">
-  <a href="https://locize.com/" target="_blank">
+  <a href="https://www.locize.com/?utm_source=i18next_localstorage_backend_readme&utm_medium=github&utm_campaign=readme" target="_blank">
     <img src="https://raw.githubusercontent.com/i18next/i18next/master/assets/locize_sponsor_240.gif" width="240px">
   </a>
 </p>
@@ -93,8 +93,8 @@ We suggest not to use a caching layer in combination with saveMissing or updateM
 
 Needing a translation management? Want to edit your translations with an InContext Editor? Use the orginal provided to you by the maintainers of i18next!
 
-![locize](https://locize.com/img/ads/github_locize.png)
+![locize](https://www.locize.com/img/ads/github_locize.png)
 
-With using [locize](http://locize.com/?utm_source=react_i18next_readme&utm_medium=github) you directly support the future of i18next and react-i18next.
+With using [locize](https://www.locize.com/?utm_source=i18next_localstorage_backend_readme&utm_medium=github&utm_campaign=readme) you directly support the future of i18next and react-i18next.
 
 ---
