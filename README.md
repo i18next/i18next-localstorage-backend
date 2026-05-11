@@ -2,6 +2,10 @@
 
 This is a i18next cache layer to be used in the browser. It will load and cache resources from localStorage and can be used in combination with the [chained backend](https://github.com/i18next/i18next-chained-backend).
 
+## Advice:
+
+If you don't like to manage your translation files manually or are simply looking for a [better management solution](https://www.locize.com?utm_source=i18next_localstorage_backend_readme&utm_medium=github&utm_campaign=readme), take a look at [i18next-locize-backend](https://github.com/locize/i18next-locize-backend) — pair it with this localStorage cache layer for instant client-side reads + always-current translations from a global CDN. The i18next [backend plugin](https://www.i18next.com/overview/plugins-and-utils#backends) for 🌐 [Locize](https://www.locize.com?utm_source=i18next_localstorage_backend_readme&utm_medium=github&utm_campaign=readme) ☁️.
+
 # Getting started
 
 Source can be loaded via [npm](https://www.npmjs.com/package/i18next-localstorage-backend) or [downloaded](https://github.com/i18next/i18next-localstorage-backend/blob/master/i18nextLocalStorageBackend.min.js) from this repo.
@@ -93,8 +97,8 @@ We suggest not to use a caching layer in combination with saveMissing or updateM
 
 Needing a translation management? Want to edit your translations with an InContext Editor? Use the orginal provided to you by the maintainers of i18next!
 
-![locize](https://www.locize.com/img/ads/github_locize.png)
+![Locize](https://www.locize.com/img/ads/github_locize.png)
 
-With using [locize](https://www.locize.com/?utm_source=i18next_localstorage_backend_readme&utm_medium=github&utm_campaign=readme) you directly support the future of i18next and react-i18next.
+With using [Locize](https://www.locize.com/?utm_source=i18next_localstorage_backend_readme&utm_medium=github&utm_campaign=readme) you directly support the future of i18next and react-i18next.
 
 ---
