@@ -1,3 +1,7 @@
+### 4.3.3
+
+- fix: i18next 26.7.0 deprecates guessing the calling convention of a backend from the number of parameters of its methods; the backend now declares it with `callbackApi`, so i18next calls `read` and `create` with a callback (and passes `create` its options), and debug mode no longer logs the deprecation notice. Older i18next versions ignore it.
+
 ### 4.3.2
 
 - fix: a corrupted cache entry no longer breaks translation loading. `JSON.parse` on the stored value was unguarded, so any malformed value under an `i18next_res_*` key (a truncated write when the storage quota is hit, a hand-edited entry, anything else writing to that key) threw straight out of `read()`. Malformed and non-object values (`null`, numbers, strings) are now treated as a cache miss, and the entry is overwritten by the next successful load.
