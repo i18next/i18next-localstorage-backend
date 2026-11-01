@@ -127,5 +127,8 @@ class Cache {
 }
 
 Cache.type = 'backend'
+// i18next >= 26.7 calls read and create with a callback (and create with the options too) instead of
+// guessing that from the number of parameters
+Cache.callbackApi = true
 
 export default Cache
