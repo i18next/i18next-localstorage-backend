@@ -97,8 +97,6 @@ We suggest not to use a caching layer in combination with saveMissing or updateM
 
 Needing a translation management? Want to edit your translations with an InContext Editor? Use the orginal provided to you by the maintainers of i18next!
 
-![Locize](https://www.locize.com/img/ads/github_locize.png)
-
 With using [Locize](https://www.locize.com/?utm_source=i18next_localstorage_backend_readme&utm_medium=github&utm_campaign=readme) you directly support the future of i18next and react-i18next.
 
 ---
